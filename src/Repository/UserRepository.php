@@ -14,8 +14,8 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method findAll() array<int, User>
- * @method findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) array<array-key, User>
+ * @method           findAll()                                                                     array<int, User>
+ * @method           findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) array<array-key, User>
  *
  * @template T
  *
