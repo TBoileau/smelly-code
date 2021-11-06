@@ -45,6 +45,7 @@
     },
     "require-dev": {
         "nunomaduro/phpinsights": "^2.0",
+        "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^1.1",
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
