@@ -74,18 +74,21 @@ return [
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
         SpaceAfterNotSniff::class,
-        DisallowMixedTypeHintSniff::class
+        DisallowMixedTypeHintSniff::class,
     ],
 
     'config' => [
         ForbiddenSetterSniff::class => [
             'exclude' => [
                 'src/Entity/User',
+                'src/Entity/SmellyCode',
+                'src/Entity/Gist',
             ],
         ],
         ForbiddenNormalClasses::class => [
             'exclude' => [
                 'src/Entity/User',
+                'src/Entity/Gist',
             ],
         ],
         LineLengthSniff::class => [
