@@ -6,13 +6,11 @@ use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
-use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
-use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
 return [
     /*
@@ -74,11 +72,19 @@ return [
         DisallowYodaComparisonSniff::class,
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
+        SpaceAfterNotSniff::class,
     ],
 
     'config' => [
+        ForbiddenSetterSniff::class => [
+            'exclude' => [
+                'src/Entity/User',
+            ],
+        ],
         ForbiddenNormalClasses::class => [
-            'exclude' => [],
+            'exclude' => [
+                'src/Entity/User',
+            ],
         ],
         LineLengthSniff::class => [
             'lineLimit' => 120,
@@ -87,6 +93,11 @@ return [
         ],
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 4,
+        ],
+        UnusedParameterSniff::class => [
+            'exclude' => [
+                'src/Security/WebAuthenticator',
+            ],
         ],
     ],
 
