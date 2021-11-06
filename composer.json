@@ -1,4 +1,6 @@
 {
+    "name": "tboileau/smelly-code",
+    "description": "Poste ton code le plus puant, et tente de devenir le plus mauvais développeur !",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -7,7 +9,6 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "composer/package-versions-deprecated": "1.11.99.4",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
