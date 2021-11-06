@@ -44,6 +44,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "nunomaduro/phpinsights": "^2.0",
         "phpstan/phpstan": "^1.1",
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
