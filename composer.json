@@ -44,6 +44,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.7",
         "nunomaduro/phpinsights": "^2.0",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^1.1",
