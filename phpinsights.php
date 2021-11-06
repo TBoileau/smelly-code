@@ -11,6 +11,7 @@ use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 
 return [
     /*
@@ -73,6 +74,7 @@ return [
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
         SpaceAfterNotSniff::class,
+        DisallowMixedTypeHintSniff::class
     ],
 
     'config' => [
@@ -97,6 +99,7 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/Security/WebAuthenticator',
+                'src/Form/RegistrationType',
             ],
         ],
     ],
