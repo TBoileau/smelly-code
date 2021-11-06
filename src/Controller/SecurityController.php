@@ -21,6 +21,9 @@ final class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     #[Route('/logout', name: 'logout')]
     public function logout(): void
     {

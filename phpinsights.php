@@ -96,9 +96,9 @@ return [
         ],
         UnusedParameterSniff::class => [
             'exclude' => [
-                'src/Security/WebAuthenticator'
-            ]
-        ]
+                'src/Security/WebAuthenticator',
+            ],
+        ],
     ],
 
     /*
