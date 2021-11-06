@@ -4,10 +4,67 @@ declare(strict_types=1);
 
 namespace Functional;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class SecurityTest extends WebTestCase
 {
+    public function testIfUserIsRegistered(): void
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/register');
+
+        $client->submitForm('S\'inscrire', [
+            'registration[email]' => 'user+11@email.com',
+            'registration[plainPassword]' => 'password',
+            'registration[nickname]' => 'user+11',
+        ]);
+
+        $this->assertResponseStatusCodeSame(302);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('security_login');
+
+        /** @var UserRepository $userRepository */
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+
+        $this->assertNotNull($userRepository->findOneBy(['email' => 'user+11@email.com']));
+    }
+
+    /**
+     * @param array{email: string, password: string, nickname: string} $formData
+     *
+     * @dataProvider provideFailedRegisterData
+     */
+    public function testIfRegisterFailed(array $formData): void
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/register');
+
+        $client->submitForm('S\'inscrire', $formData);
+
+        $this->assertResponseStatusCodeSame(200);
+    }
+
+    public function provideFailedRegisterData(): iterable
+    {
+        $baseData = static fn (array $data) => $data + [
+                'registration[email]' => 'user+11@email.com',
+                'registration[plainPassword]' => 'password',
+                'registration[nickname]' => 'user+11',
+            ];
+
+        yield 'email is empty' => [$baseData(['registration[email]' => ''])];
+        yield 'password is empty' => [$baseData(['registration[plainPassword]' => ''])];
+        yield 'nickname is empty' => [$baseData(['registration[nickname]' => ''])];
+        yield 'email is invalid' => [$baseData(['registration[email]' => 'fail'])];
+        yield 'email is not unique' => [$baseData(['registration[email]' => 'user+1@email.com'])];
+        yield 'nickname is not unique' => [$baseData(['registration[nickname]' => 'user+1'])];
+    }
+
     public function testIfLoginIsSuccessful(): void
     {
         $client = static::createClient();
@@ -29,7 +86,7 @@ final class SecurityTest extends WebTestCase
     /**
      * @param array{email: string, password: string} $formData
      *
-     * @dataProvider provideFailedData
+     * @dataProvider provideFailedLoginData
      */
     public function testIfLoginFailed(array $formData): void
     {
@@ -46,7 +103,7 @@ final class SecurityTest extends WebTestCase
         $this->assertRouteSame('security_login');
     }
 
-    public function provideFailedData(): iterable
+    public function provideFailedLoginData(): iterable
     {
         $baseData = static fn (array $data) => $data + [
             'email' => 'user+1@email.com',
