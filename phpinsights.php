@@ -103,6 +103,7 @@ return [
             'exclude' => [
                 'src/Security/WebAuthenticator',
                 'src/Form/RegistrationType',
+                'src/Form/GistType',
             ],
         ],
     ],
