@@ -6,6 +6,7 @@
         <br/>
         Down votes : {{ smelly_code.downvotes|length }}
 
+        <a href="{{ path('smelly_code_skip', {id: smelly_code.id}) }}">Skip</a>
         {% if is_granted('vote', smelly_code) %}
             <a href="{{ path('smelly_code_up_vote', {id: smelly_code.id}) }}">Up vote</a>
             <a href="{{ path('smelly_code_down_vote', {id: smelly_code.id}) }}">Down vote</a>
