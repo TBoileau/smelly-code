@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Gist;
+use App\Entity\User;
 use App\Form\GistType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,11 @@ final class SmellyCodeController extends AbstractController
     public function new(Request $request): Response
     {
         $gist = new Gist();
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $gist->setUser($user);
 
         $form = $this->createForm(GistType::class, $gist)->handleRequest($request);
 
