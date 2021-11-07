@@ -84,4 +84,10 @@ abstract class SmellyCode
     {
         return $this->downVotes;
     }
+
+    public function canVote(User $user): bool
+    {
+        return !(new ArrayCollection([$this->upVotes->toArray(), ...$this->downVotes->toArray(), $this->user]))
+            ->contains($user);
+    }
 }
