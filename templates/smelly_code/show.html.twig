@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if smelly_code is not null %}
+        Up votes : {{ smelly_code.upVotes|length }}
+        <br/>
+        Down votes : {{ smelly_code.downvotes|length }}
+
+        <embed src="https://carbon.now.sh/embed/{{ smelly_code|smelly_code }}"/>
+
+    {% endif %}
+{% endblock %}

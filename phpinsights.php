@@ -106,6 +106,7 @@ return [
                 'src/Security/WebAuthenticator',
                 'src/Form/RegistrationType',
                 'src/Form/GistType',
+                'src/Doctrine/DQL/RandFunction',
             ],
         ],
     ],
