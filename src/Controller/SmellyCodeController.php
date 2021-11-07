@@ -36,6 +36,6 @@ final class SmellyCodeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('smelly_code/new.html.twig', ['form' => $form->createView()]);
+        return $this->renderForm('smelly_code/new.html.twig', ['form' => $form]);
     }
 }
