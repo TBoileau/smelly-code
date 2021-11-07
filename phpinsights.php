@@ -82,15 +82,12 @@ return [
     'config' => [
         ForbiddenSetterSniff::class => [
             'exclude' => [
-                'src/Entity/User',
-                'src/Entity/SmellyCode',
-                'src/Entity/Gist',
+                'src/Entity',
             ],
         ],
         ForbiddenNormalClasses::class => [
             'exclude' => [
-                'src/Entity/User',
-                'src/Entity/Gist',
+                'src/Entity',
             ],
         ],
         LineLengthSniff::class => [
@@ -100,6 +97,9 @@ return [
         ],
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 4,
+            'exclude' => [
+                'src/DataFixtures'
+            ]
         ],
         UnusedParameterSniff::class => [
             'exclude' => [
@@ -107,6 +107,7 @@ return [
                 'src/Form/RegistrationType',
                 'src/Form/GistType',
                 'src/Doctrine/DQL/RandFunction',
+                'src/Security/Voter/SmellyCodeVoter',
             ],
         ],
     ],
