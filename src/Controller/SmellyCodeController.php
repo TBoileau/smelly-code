@@ -11,6 +11,7 @@ use App\Form\GistType;
 use App\Repository\SmellyCodeRepository;
 use App\Security\Voter\SmellyCodeVoter;
 use App\UseCase\NewGist\NewGistInterface;
+use App\UseCase\Skip\SkipInterface;
 use App\UseCase\Vote\DownVoteInterface;
 use App\UseCase\Vote\UpVoteInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -82,6 +83,14 @@ final class SmellyCodeController extends AbstractController
     public function downVote(SmellyCode $smellyCode, DownVoteInterface $downVote): RedirectResponse
     {
         $downVote($smellyCode);
+
+        return $this->redirectToRoute('smelly_code_show');
+    }
+
+    #[Route('/{id}/skip', name: 'skip', requirements: ['id' => '\d+'])]
+    public function skip(SmellyCode $smellyCode, SkipInterface $skip): RedirectResponse
+    {
+        $skip($smellyCode);
 
         return $this->redirectToRoute('smelly_code_show');
     }
