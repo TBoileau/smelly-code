@@ -12,6 +12,19 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ShowSmellyCodeTest extends WebTestCase
 {
+    public function testIfSkipSmellyCodeIsSuccessful(): void
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/');
+
+        $this->assertResponseIsSuccessful();
+
+        $client->clickLink('Skip');
+
+        $this->assertResponseStatusCodeSame(302);
+    }
+
     public function testIfSmellyCodeShown(): void
     {
         $client = static::createClient();
