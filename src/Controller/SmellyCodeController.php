@@ -11,6 +11,8 @@ use App\Form\GistType;
 use App\Repository\SmellyCodeRepository;
 use App\Security\Voter\SmellyCodeVoter;
 use App\UseCase\NewGist\NewGistInterface;
+use App\UseCase\Vote\DownVoteInterface;
+use App\UseCase\Vote\UpVoteInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -59,6 +61,7 @@ final class SmellyCodeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newGist($gist);
+
             return $this->redirectToRoute('smelly_code_show');
         }
 
@@ -67,38 +70,18 @@ final class SmellyCodeController extends AbstractController
 
     #[Route('/{id}/up-vote', name: 'up_vote', requirements: ['id' => '\d+'])]
     #[IsGranted(SmellyCodeVoter::VOTE, subject: 'smellyCode')]
-    public function upVote(SmellyCode $smellyCode, Request $request): RedirectResponse
+    public function upVote(SmellyCode $smellyCode, UpVoteInterface $upVote): RedirectResponse
     {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        $smellyCode->getUpVotes()->add($user);
-
-        $this->getDoctrine()->getManager()->flush();
-
-        /** @var array<array-key, SmellyCode> $smellyCodes */
-        $smellyCodes = $request->getSession()->get('smelly_codes', []);
-        $smellyCodes[] = $smellyCode;
-        $request->getSession()->set('smelly_codes', $smellyCodes);
+        $upVote($smellyCode);
 
         return $this->redirectToRoute('smelly_code_show');
     }
 
     #[Route('/{id}/down-vote', name: 'down_vote', requirements: ['id' => '\d+'])]
     #[IsGranted(SmellyCodeVoter::VOTE, subject: 'smellyCode')]
-    public function downVote(SmellyCode $smellyCode, Request $request): RedirectResponse
+    public function downVote(SmellyCode $smellyCode, DownVoteInterface $downVote): RedirectResponse
     {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        $smellyCode->getDownVotes()->add($user);
-
-        $this->getDoctrine()->getManager()->flush();
-
-        /** @var array<array-key, SmellyCode> $smellyCodes */
-        $smellyCodes = $request->getSession()->get('smelly_codes', []);
-        $smellyCodes[] = $smellyCode;
-        $request->getSession()->set('smelly_codes', $smellyCodes);
+        $downVote($smellyCode);
 
         return $this->redirectToRoute('smelly_code_show');
     }

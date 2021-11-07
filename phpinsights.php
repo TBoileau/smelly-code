@@ -98,8 +98,8 @@ return [
         CyclomaticComplexityIsHigh::class => [
             'maxComplexity' => 4,
             'exclude' => [
-                'src/DataFixtures'
-            ]
+                'src/DataFixtures',
+            ],
         ],
         UnusedParameterSniff::class => [
             'exclude' => [
