@@ -46,7 +46,7 @@ final class SecurityTest extends WebTestCase
 
         $client->submitForm('S\'inscrire', $formData);
 
-        $this->assertResponseStatusCodeSame(200);
+        $this->assertResponseStatusCodeSame(422);
     }
 
     public function provideFailedRegisterData(): iterable
