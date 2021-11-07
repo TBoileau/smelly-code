@@ -72,7 +72,7 @@ final class CreateSmellyCodeTest extends WebTestCase
             'gist[url]' => $url,
         ]);
 
-        $this->assertResponseStatusCodeSame(200);
+        $this->assertResponseStatusCodeSame(422);
     }
 
     public function provideBadUrl(): iterable

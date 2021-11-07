@@ -6,10 +6,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\UseCase\Register\RegisterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -26,27 +26,20 @@ final class SecurityController extends AbstractController
     }
 
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function register(Request $request, RegisterInterface $register): Response
     {
         $user = new User();
 
-        $form = $this->createForm(
-            RegistrationType::class,
-            $user,
-            ['validation_groups' => ['Default', 'register']]
-        )->handleRequest($request);
+        $form = $this->createForm(RegistrationType::class, $user, ['validation_groups' => ['Default', 'register']])
+            ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $plainPassword = $user->getPlainPassword();
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-            $this->getDoctrine()->getManager()->persist($user);
-            $this->getDoctrine()->getManager()->flush();
+            $register($user);
 
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('security/register.html.twig', ['form' => $form->createView()]);
+        return $this->renderForm('security/register.html.twig', ['form' => $form]);
     }
 
     /**

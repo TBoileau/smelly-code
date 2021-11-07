@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Gist;
 use App\Entity\User;
 use App\Form\GistType;
+use App\UseCase\NewGist\NewGistInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class SmellyCodeController extends AbstractController
 {
     #[Route('/new', name: 'new')]
-    public function new(Request $request): Response
+    public function new(Request $request, NewGistInterface $newGist): Response
     {
         $gist = new Gist();
 
@@ -30,12 +31,10 @@ final class SmellyCodeController extends AbstractController
         $form = $this->createForm(GistType::class, $gist)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($gist);
-            $this->getDoctrine()->getManager()->flush();
-
+            $newGist($gist);
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('smelly_code/new.html.twig', ['form' => $form->createView()]);
+        return $this->renderForm('smelly_code/new.html.twig', ['form' => $form]);
     }
 }
