@@ -9,6 +9,7 @@ use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
@@ -73,6 +74,7 @@ return [
         DisallowYodaComparisonSniff::class,
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
+        SuperfluousInterfaceNamingSniff::class,
         SpaceAfterNotSniff::class,
         DisallowMixedTypeHintSniff::class,
     ],
