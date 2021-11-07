@@ -21,5 +21,10 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    _instanceof:
+        App\SmellyCode\UrlGeneratorInterface:
+            tags: ['smelly_code.url_generator']
+
+    App\SmellyCode\SmellyCodeUrlGeneratorFactory:
+        arguments:
+            - !tagged_iterator smelly_code.url_generator

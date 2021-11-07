@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional;
+namespace App\Tests\Functional;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -80,7 +80,7 @@ final class SecurityTest extends WebTestCase
 
         $client->followRedirect();
 
-        $this->assertRouteSame('home');
+        $this->assertRouteSame('smelly_code_show');
     }
 
     /**
