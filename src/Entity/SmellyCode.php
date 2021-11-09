@@ -42,11 +42,19 @@ abstract class SmellyCode
     #[ORM\JoinTable(name: 'smelly_code_down_votes')]
     private Collection $downVotes;
 
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class)]
+    #[ORM\JoinTable(name: 'smelly_code_tags')]
+    private Collection $tags;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->upVotes = new ArrayCollection();
         $this->downVotes = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,5 +97,13 @@ abstract class SmellyCode
     {
         return !(new ArrayCollection([$this->upVotes->toArray(), ...$this->downVotes->toArray(), $this->user]))
             ->contains($user);
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
     }
 }
