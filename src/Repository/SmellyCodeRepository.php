@@ -50,6 +50,28 @@ final class SmellyCodeRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return array<array-key, SmellyCode>
+     */
+    public function getTopSmellyCodesByUser(User $user): array
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->createQueryBuilder('s')
+            ->addSelect('up')
+            ->addSelect('down')
+            ->addSelect('t')
+            ->leftJoin('s.upVotes', 'up')
+            ->leftJoin('s.downVotes', 'down')
+            ->leftJoin('s.tags', 't')
+            ->where('s.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('COUNT(up) - COUNT(down)', 'desc')
+            ->groupBy('s.id')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param array<array-key, SmellyCode> $smellyCodes
      */
     public function getRandomSmellyCode(array $smellyCodes, ?User $user): ?SmellyCode
