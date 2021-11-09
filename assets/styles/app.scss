@@ -1,0 +1,76 @@
+@import "~reset-css";
+
+@mixin container() {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    nav {
+        @include container;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        ul {
+            display: flex;
+            gap: 0 2rem;
+        }
+    }
+}
+
+main {
+    margin: 2rem 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    section {
+        @include container;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem 0;
+        flex-grow: 1;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        embed {
+            flex-grow: 1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+
+            a {
+                padding: 1rem;
+                flex-grow: 1;
+                text-align: center;
+                color: inherit;
+                text-decoration: none;
+                border: 1px solid #cecece;
+
+                &:hover {
+                    background: rgba(#000, 0.05);
+                }
+            }
+        }
+    }
+}
+

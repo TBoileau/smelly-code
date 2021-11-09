@@ -75,8 +75,8 @@ final class ShowSmellyCodeTest extends WebTestCase
 
     public function provideLinkTitles(): iterable
     {
-        yield 'up vote' => ['Up vote'];
-        yield 'down vote' => ['Down vote'];
+        yield 'up vote' => ['🤮 0'];
+        yield 'down vote' => ['🥱 0'];
     }
 
     /**

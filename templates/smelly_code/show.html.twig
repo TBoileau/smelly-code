@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if smelly_code is not null %}
-        Up votes : {{ smelly_code.upVotes|length }}
-        <br/>
-        Down votes : {{ smelly_code.downvotes|length }}
-
-        <a href="{{ path('smelly_code_skip', {id: smelly_code.id}) }}">Skip</a>
-        {% if is_granted('vote', smelly_code) %}
-            <a href="{{ path('smelly_code_up_vote', {id: smelly_code.id}) }}">Up vote</a>
-            <a href="{{ path('smelly_code_down_vote', {id: smelly_code.id}) }}">Down vote</a>
+    <section>
+        {% if smelly_code is not null %}
+            <h1>{{ smelly_code.name }}</h1>
+            <embed src="https://carbon.now.sh/embed/{{ smelly_code|smelly_code }}"></embed>
+            <nav>
+                {% if is_granted("vote", smelly_code) %}
+                    <a title="Down vote" href="{{ path('smelly_code_down_vote', {id: smelly_code.id}) }}">🥱 {{ smelly_code.downVotes|length }}</a>
+                {% endif %}
+                <a href="{{ path('smelly_code_skip', {id: smelly_code.id}) }}">Skip</a>
+                {% if is_granted("vote", smelly_code) %}
+                    <a title="Up vote" href="{{ path('smelly_code_up_vote', {id: smelly_code.id}) }}">🤮 {{ smelly_code.upVotes|length }}</a>
+                {% endif %}
+            </nav>
         {% endif %}
+    </section>
 
-        <embed src="https://carbon.now.sh/embed/{{ smelly_code|smelly_code }}"/>
-
-    {% endif %}
 {% endblock %}
