@@ -49,6 +49,7 @@ final class ShowSmellyCodeTest extends WebTestCase
 
         $smellyCode = new Gist();
         $smellyCode->setUser($gistAuthor);
+        $smellyCode->setName('Name');
         $smellyCode->setUrl('https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5');
 
         $entityManager->persist($smellyCode);
@@ -116,6 +117,7 @@ final class ShowSmellyCodeTest extends WebTestCase
 
         $smellyCode = new Gist();
         $smellyCode->setUser($gistAuthor);
+        $smellyCode->setName('Name');
         $smellyCode->setUrl('https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5');
 
         $entityManager->persist($smellyCode);

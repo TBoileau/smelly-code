@@ -32,6 +32,7 @@ final class SmellyCodeRepository extends ServiceEntityRepository
      */
     public function getTopSmellyCodes(): array
     {
+        /* @phpstan-ignore-next-line */
         return $this->createQueryBuilder('s')
             ->addSelect('u')
             ->addSelect('up')

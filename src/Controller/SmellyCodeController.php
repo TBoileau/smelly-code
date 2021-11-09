@@ -100,7 +100,7 @@ final class SmellyCodeController extends AbstractController
     public function topSmellyCodes(SmellyCodeRepository $smellyCodeRepository): Response
     {
         return $this->render('smelly_code/top_smelly_codes.html.twig', [
-            'smelly_codes' => $smellyCodeRepository->getTopSmellyCodes()
+            'smelly_codes' => $smellyCodeRepository->getTopSmellyCodes(),
         ]);
     }
 
@@ -108,7 +108,7 @@ final class SmellyCodeController extends AbstractController
     public function topUsers(UserRepository $userRepository): Response
     {
         return $this->render('smelly_code/top_users.html.twig', [
-            'smelly_codes' => $userRepository->getTopUsers()
+            'users' => $userRepository->getTopUsers(),
         ]);
     }
 }

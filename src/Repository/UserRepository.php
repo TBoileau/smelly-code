@@ -24,4 +24,26 @@ final class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    /**
+     * @return array<array-key, User>
+     */
+    public function getTopUsers(): array
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->createQueryBuilder('u')
+            ->addSelect('s')
+            ->addSelect('up')
+            ->addSelect('down')
+            ->addSelect('t')
+            ->join('u.smellyCodes', 's')
+            ->leftJoin('s.upVotes', 'up')
+            ->leftJoin('s.downVotes', 'down')
+            ->leftJoin('s.tags', 't')
+            ->orderBy('COUNT(up) - COUNT(down)', 'desc')
+            ->groupBy('s.id')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -113,9 +113,9 @@ return [
         ],
         ParameterTypeHintSniff::class => [
             'exclude' => [
-                'src/DataTransformer'
-            ]
-        ]
+                'src/DataTransformer',
+            ],
+        ],
     ],
 
     /*
