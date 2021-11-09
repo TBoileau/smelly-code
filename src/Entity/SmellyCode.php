@@ -106,4 +106,12 @@ abstract class SmellyCode
     {
         return $this->tags;
     }
+
+    /**
+     * @param Collection<int, Tag> $tags
+     */
+    public function setTags(Collection $tags): void
+    {
+        $this->tags = $tags;
+    }
 }
