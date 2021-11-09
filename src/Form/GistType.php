@@ -23,7 +23,10 @@ final class GistType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('url', UrlType::class)->add('tags', TextType::class);
+        $builder
+            ->add('url', UrlType::class)
+            ->add('name', TextType::class)
+            ->add('tags', TextType::class);
 
         $builder->get('tags')->addModelTransformer($this->tagsDataTransformer);
     }

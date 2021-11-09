@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: SmellyCodeRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
@@ -20,6 +21,10 @@ abstract class SmellyCode
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     protected ?int $id = null;
+
+    #[ORM\Column]
+    #[NotBlank]
+    protected string $name;
 
     #[ORM\Column(type: 'datetime_immutable')]
     protected DateTimeImmutable $createdAt;
@@ -60,6 +65,16 @@ abstract class SmellyCode
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     public function getCreatedAt(): DateTimeImmutable
