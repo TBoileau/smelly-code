@@ -15,3 +15,4 @@ parameters:
     level: 9
     paths:
         - src
+    checkGenericClassInNonGenericObjectType: false

@@ -13,6 +13,7 @@ use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
 return [
     /*
@@ -110,6 +111,11 @@ return [
                 'src/Security/Voter/SmellyCodeVoter',
             ],
         ],
+        ParameterTypeHintSniff::class => [
+            'exclude' => [
+                'src/DataTransformer'
+            ]
+        ]
     ],
 
     /*
