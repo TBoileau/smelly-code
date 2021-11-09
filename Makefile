@@ -6,6 +6,8 @@ install:
 	sed -i -e 's/DATABASE_PASSWORD/$(db_password)/' .env.$(env).local
 	composer install
 	make prepare env=$(env)
+	yarn install
+	yarn run dev
 
 phpstan:
 	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
