@@ -28,6 +28,28 @@ final class SmellyCodeRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return array<array-key, SmellyCode>
+     */
+    public function getTopSmellyCodes(): array
+    {
+        /* @phpstan-ignore-next-line */
+        return $this->createQueryBuilder('s')
+            ->addSelect('u')
+            ->addSelect('up')
+            ->addSelect('down')
+            ->addSelect('t')
+            ->leftJoin('s.upVotes', 'up')
+            ->leftJoin('s.downVotes', 'down')
+            ->join('s.user', 'u')
+            ->leftJoin('s.tags', 't')
+            ->orderBy('COUNT(up) - COUNT(down)', 'desc')
+            ->groupBy('s.id')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param array<array-key, SmellyCode> $smellyCodes
      */
     public function getRandomSmellyCode(array $smellyCodes, ?User $user): ?SmellyCode

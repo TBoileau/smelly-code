@@ -44,6 +44,7 @@ final class CreateSmellyCodeTest extends WebTestCase
         $client->submitForm('Créer', [
             'gist[url]' => 'https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5',
             'gist[tags]' => 'Tag 1,foo',
+            'gist[name]' => 'New smelly code',
         ]);
 
         $this->assertResponseStatusCodeSame(302);
@@ -54,9 +55,11 @@ final class CreateSmellyCodeTest extends WebTestCase
     }
 
     /**
-     * @dataProvider provideBadUrl
+     * @param array{url: string, name: string, tags: string} $formData
+     *
+     * @dataProvider provideBadData
      */
-    public function testIfGistCreationFailed(string $url): void
+    public function testIfGistCreationFailed(array $formData): void
     {
         $client = static::createClient();
 
@@ -72,18 +75,21 @@ final class CreateSmellyCodeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        $client->submitForm('Créer', [
-            'gist[url]' => $url,
-            'gist[tags]' => 'Tag 1,foo',
-        ]);
+        $client->submitForm('Créer', $formData);
 
         $this->assertResponseStatusCodeSame(422);
     }
 
-    public function provideBadUrl(): iterable
+    public function provideBadData(): iterable
     {
-        yield 'url is empty' => [''];
-        yield 'url is invalid' => ['fail'];
-        yield 'url is not a gist url' => ['https://www.google.com'];
+        $baseData = static fn (array $data) => $data + [
+                'gist[url]' => 'https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5',
+                'gist[tags]' => 'Tag 1,foo',
+                'gist[name]' => 'New smelly code',
+            ];
+        yield 'name is empty' => [$baseData(['gist[name]' => ''])];
+        yield 'url is empty' => [$baseData(['gist[url]' => ''])];
+        yield 'url is invalid' => [$baseData(['gist[url]' => 'fail'])];
+        yield 'url is not a gist url' => [$baseData(['gist[url]' => 'https://www.google.com'])];
     }
 }

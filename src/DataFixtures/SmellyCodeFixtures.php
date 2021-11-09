@@ -53,6 +53,7 @@ final class SmellyCodeFixtures extends Fixture implements DependentFixtureInterf
 
         $smellyCode = new Gist();
         $smellyCode->setUser($user);
+        $smellyCode->setName('Smelly code');
         $smellyCode->setUrl('https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5');
         $smellyCode->setTags(new ArrayCollection(array_slice($tags, 0, 3)));
 

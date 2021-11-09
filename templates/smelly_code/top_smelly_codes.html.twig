@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ul>
+        {% for smelly_code in smelly_codes %}
+            <li>
+                {{ smelly_code.name }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -37,6 +39,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[NotBlank(groups: ['register'])]
     private ?string $plainPassword = null;
+
+    /**
+     * @var Collection<int, SmellyCode>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SmellyCode::class)]
+    private Collection $smellyCodes;
+
+    public function __construct()
+    {
+        $this->smellyCodes = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -117,5 +130,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, SmellyCode>
+     */
+    public function getSmellyCodes(): Collection
+    {
+        return $this->smellyCodes;
     }
 }
