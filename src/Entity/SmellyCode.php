@@ -29,7 +29,7 @@ abstract class SmellyCode
     #[ORM\Column(type: 'datetime_immutable')]
     protected DateTimeImmutable $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'smellyCodes')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private User $user;
 

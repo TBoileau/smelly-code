@@ -9,6 +9,7 @@ use App\Entity\SmellyCode;
 use App\Entity\User;
 use App\Form\GistType;
 use App\Repository\SmellyCodeRepository;
+use App\Repository\UserRepository;
 use App\Security\Voter\SmellyCodeVoter;
 use App\UseCase\NewGist\NewGistInterface;
 use App\UseCase\Skip\SkipInterface;
@@ -93,5 +94,21 @@ final class SmellyCodeController extends AbstractController
         $skip($smellyCode);
 
         return $this->redirectToRoute('smelly_code_show');
+    }
+
+    #[Route('/top-smelly-codes', name: 'top_smelly_codes')]
+    public function topSmellyCodes(SmellyCodeRepository $smellyCodeRepository): Response
+    {
+        return $this->render('smelly_code/top_smelly_codes.html.twig', [
+            'smelly_codes' => $smellyCodeRepository->getTopSmellyCodes()
+        ]);
+    }
+
+    #[Route('/top-users', name: 'top_users')]
+    public function topUsers(UserRepository $userRepository): Response
+    {
+        return $this->render('smelly_code/top_users.html.twig', [
+            'smelly_codes' => $userRepository->getTopUsers()
+        ]);
     }
 }
