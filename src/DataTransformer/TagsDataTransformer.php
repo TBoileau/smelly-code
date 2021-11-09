@@ -12,6 +12,9 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 final class TagsDataTransformer implements DataTransformerInterface
 {
+    /**
+     * @param TagRepository<Tag> $tagRepository
+     */
     public function __construct(private TagRepository $tagRepository)
     {
     }
