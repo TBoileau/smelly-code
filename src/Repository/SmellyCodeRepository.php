@@ -7,7 +7,6 @@ namespace App\Repository;
 use App\Entity\SmellyCode;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -85,11 +84,7 @@ final class SmellyCodeRepository extends ServiceEntityRepository
         $queryBuilder->andWhere('s NOT IN (:smellyCodes)')->setParameter('smellyCodes', [0] + $smellyCodes);
 
         if (null !== $user) {
-            $queryBuilder
-                ->andWhere('u != :user')
-                ->setParameter('user', $user)
-                ->leftJoin('s.upVotes', 'up', Join::WITH, 'up != :user')
-                ->leftJoin('s.downVotes', 'down', Join::WITH, 'down != :user');
+            $queryBuilder->andWhere('u != :user')->setParameter('user', $user);
         }
 
         /* @phpstan-ignore-next-line */

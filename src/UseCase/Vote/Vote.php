@@ -6,6 +6,7 @@ namespace App\UseCase\Vote;
 
 use App\Entity\SmellyCode;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -27,9 +28,8 @@ abstract class Vote
 
         /** @var User $user */
         $user = $token->getUser();
-
         $this->vote($smellyCode, $user);
-
+        $smellyCode->setUpdatedAt(new DateTimeImmutable());
         $this->entityManager->flush();
 
         /** @var array<array-key, SmellyCode> $smellyCodes */

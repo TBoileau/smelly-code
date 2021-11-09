@@ -95,8 +95,8 @@ final class SmellyCodeController extends AbstractController
         return $this->redirectToRoute('smelly_code_show');
     }
 
-    #[Route('/top-smelly-codes', name: 'top_smelly_codes')]
-    public function topSmellyCodes(SmellyCodeRepository $smellyCodeRepository): Response
+    #[Route('/top-smelly-codes', name: 'top')]
+    public function top(SmellyCodeRepository $smellyCodeRepository): Response
     {
         return $this->render('smelly_code/top_smelly_codes.html.twig', [
             'smelly_codes' => $smellyCodeRepository->getTopSmellyCodes(),

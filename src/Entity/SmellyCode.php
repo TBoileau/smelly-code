@@ -29,6 +29,9 @@ abstract class SmellyCode
     #[ORM\Column(type: 'datetime_immutable')]
     protected DateTimeImmutable $createdAt;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    protected DateTimeImmutable $updatedAt;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'smellyCodes')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private User $user;
@@ -57,6 +60,7 @@ abstract class SmellyCode
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
         $this->upVotes = new ArrayCollection();
         $this->downVotes = new ArrayCollection();
         $this->tags = new ArrayCollection();
@@ -110,8 +114,13 @@ abstract class SmellyCode
 
     public function canVote(User $user): bool
     {
-        return !(new ArrayCollection([$this->upVotes->toArray(), ...$this->downVotes->toArray(), $this->user]))
-            ->contains($user);
+        return !(new ArrayCollection(
+            array_merge(
+                $this->upVotes->toArray(),
+                $this->downVotes->toArray(),
+                [$this->user]
+            )
+        ))->contains($user);
     }
 
     /**
@@ -128,5 +137,15 @@ abstract class SmellyCode
     public function setTags(Collection $tags): void
     {
         $this->tags = $tags;
+    }
+
+    public function getUpdatedAt(): DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

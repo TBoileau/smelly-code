@@ -2,18 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Smelly Code{% endblock %}</title>
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav>
+                <a href="{{ path("smelly_code_show") }}">Smelly Code</a>
+                <ul>
+                    <li>
+                        <a href="{{ path("smelly_code_new") }}">Poster</a>
+                    </li>
+                    <li>
+                        <a href="{{ path("smelly_code_top") }}">Top Smelly codes</a>
+                    </li>
+                    <li>
+                        <a href="{{ path("user_top") }}">Top Users</a>
+                    </li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path("security_logout") }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path("security_login") }}">Sign in</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>
