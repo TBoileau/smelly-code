@@ -46,5 +46,20 @@
         <main>
             {% block body %}{% endblock %}
         </main>
+        <div class="flashbag">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="message message-{{ label }}" role="alert">
+                        <div class="toast-body">
+                            {% if message is iterable %}
+                                {{ message.message }}
+                            {% else %}
+                                {{ message }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
     </body>
 </html>
