@@ -27,6 +27,9 @@
                     </li>
                     {% if is_granted('ROLE_USER') %}
                         <li>
+                            <a href="{{ path("user_profile") }}">Profil</a>
+                        </li>
+                        <li>
                             <a href="{{ path("security_logout") }}">Logout</a>
                         </li>
                     {% else %}

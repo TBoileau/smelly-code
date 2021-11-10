@@ -15,7 +15,7 @@ final class SmellyCodeFactory implements SmellyCodeFactoryInterface
 {
     public function createFromDto(SmellyCodeDto $smellyCodeDto): SmellyCode
     {
-        if (parse_url($smellyCodeDto->url) === false) {
+        if (false === parse_url($smellyCodeDto->url)) {
             throw new Exception('This url is not valid.');
         }
 
