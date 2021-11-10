@@ -8,17 +8,20 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: 'email')]
 #[UniqueEntity(fields: 'nickname')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -45,6 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: SmellyCode::class)]
     private Collection $smellyCodes;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $avatar = null;
+
+    #[Image(groups: ['profile'], maxSize: '1M')]
+    private ?UploadedFile $avatarFile = null;
 
     public function __construct()
     {
@@ -138,5 +147,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getSmellyCodes(): Collection
     {
         return $this->smellyCodes;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
+    public function getAvatarFile(): ?UploadedFile
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?UploadedFile $avatarFile): void
+    {
+        $this->avatarFile = $avatarFile;
+    }
+
+    public function serialize(): string
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->nickname,
+        ]);
+    }
+
+    /**
+     * @param string $data
+     */
+    public function unserialize($data): void
+    {
+        /** @var array<int, string|int> $unserializedData */
+        $unserializedData = unserialize($data);
+        [
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->nickname,
+        ] = $unserializedData;
     }
 }

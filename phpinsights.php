@@ -98,7 +98,7 @@ return [
             'ignoreComments' => true,
         ],
         CyclomaticComplexityIsHigh::class => [
-            'maxComplexity' => 4,
+            'maxComplexity' => 5,
             'exclude' => [
                 'src/DataFixtures',
             ],
@@ -119,6 +119,7 @@ return [
         ParameterTypeHintSniff::class => [
             'exclude' => [
                 'src/DataTransformer',
+                'src/Entity/User',
             ],
         ],
     ],
