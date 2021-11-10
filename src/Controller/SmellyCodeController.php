@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Gist;
+use App\Dto\SmellyCode as SmellyCodeDto;
 use App\Entity\SmellyCode;
 use App\Entity\User;
-use App\Form\GistType;
+use App\Form\SmellyCodeType;
 use App\Repository\SmellyCodeRepository;
 use App\Security\Voter\SmellyCodeVoter;
-use App\UseCase\NewGist\NewGistInterface;
+use App\UseCase\NewSmellyCode\NewSmellyCodeInterface;
 use App\UseCase\Skip\SkipInterface;
 use App\UseCase\Vote\DownVoteInterface;
 use App\UseCase\Vote\UpVoteInterface;
@@ -49,19 +49,14 @@ final class SmellyCodeController extends AbstractController
 
     #[Route('/new', name: 'new')]
     #[IsGranted('ROLE_USER')]
-    public function new(Request $request, NewGistInterface $newGist): Response
+    public function new(Request $request, NewSmellyCodeInterface $newSmellyCode): Response
     {
-        $gist = new Gist();
+        $smellyCodeDto = new SmellyCodeDto();
 
-        /** @var User $user */
-        $user = $this->getUser();
-
-        $gist->setUser($user);
-
-        $form = $this->createForm(GistType::class, $gist)->handleRequest($request);
+        $form = $this->createForm(SmellyCodeType::class, $smellyCodeDto)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newGist($gist);
+            $newSmellyCode($smellyCodeDto);
 
             return $this->redirectToRoute('smelly_code_show');
         }

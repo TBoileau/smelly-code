@@ -14,7 +14,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 #[ORM\Entity(repositoryClass: SmellyCodeRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'discr', type: 'string')]
-#[ORM\DiscriminatorMap(['gist' => Gist::class])]
+#[ORM\DiscriminatorMap([
+    'gist' => Gist::class,
+    'carbon' => Carbon::class,
+])]
 abstract class SmellyCode
 {
     #[ORM\Id]
