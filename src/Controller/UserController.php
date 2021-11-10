@@ -6,8 +6,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileType;
+use App\Form\UserType;
 use App\Repository\SmellyCodeRepository;
 use App\Repository\UserRepository;
+use App\UseCase\UpdatePassword\UpdatePasswordInterface;
 use App\UseCase\UpdateProfile\UpdateProfileInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,5 +57,27 @@ final class UserController extends AbstractController
         }
 
         return $this->renderForm('user/profile.html.twig', ['form' => $form]);
+    }
+
+    #[Route('/update-password', name: 'password')]
+    #[IsGranted('ROLE_USER')]
+    public function password(Request $request, UpdatePasswordInterface $updatePassword): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $form = $this->createForm(
+            UserType::class,
+            $user,
+            ['validation_groups' => ['Default', 'password']]
+        )->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $updatePassword($user);
+
+            return $this->redirectToRoute('user_password');
+        }
+
+        return $this->renderForm('user/password.html.twig', ['form' => $form]);
     }
 }
