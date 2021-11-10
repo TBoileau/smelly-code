@@ -1,4 +1,4 @@
-.PHONY: install build analyse phpstan phpinsights phpcpd phpmd tests
+.PHONY: install build analyse phpstan phpinsights phpcpd phpmd tests eslint stylelint
 
 install:
 	cp .env.dist .env.$(env).local
@@ -8,6 +8,12 @@ install:
 	make prepare env=$(env)
 	yarn install
 	yarn run dev
+
+eslint:
+	npx eslint assets/
+
+stylelint:
+	npx stylelint "assets/styles/**/*.scss"
 
 phpstan:
 	php vendor/bin/phpstan analyse -c phpstan.neon src --no-progress
@@ -24,10 +30,21 @@ phpcpd:
 composer:
 	composer valid
 
+twig:
+	php bin/console lint:twig templates
+	vendor/bin/twigcs templates
+
+doctrine:
+	php bin/console doctrine:schema:valid --skip-sync
+
 analyse:
 	make composer
+	make eslint
+	make stylelint
+	make twig
 	make phpmd
 	make phpcpd
+	make doctrine
 	make phpinsights
 	make phpstan
 
@@ -47,4 +64,6 @@ tests:
 	php bin/phpunit --testdox
 
 fix:
+	npx eslint assets/ --fix
+	npx stylelint "assets/styles/**/*.scss" --fix
 	vendor/bin/php-cs-fixer fix

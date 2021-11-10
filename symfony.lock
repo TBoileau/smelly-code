@@ -148,6 +148,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "friendsoftwig/twigcs": {
+        "version": "v5.1.0"
+    },
     "justinrainbow/json-schema": {
         "version": "5.2.11"
     },
