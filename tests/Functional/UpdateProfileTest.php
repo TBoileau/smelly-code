@@ -29,7 +29,7 @@ class UpdateProfileTest extends WebTestCase
             'profile[nickname]' => 'Nickname',
             'profile[email]' => 'user+0@email.com',
             'profile[avatarFile]' => new UploadedFile(
-                __DIR__.'/../../public/uploads/avatar_test.png',
+                __DIR__.'/../../public/uploads/avatar.png',
                 'avatar_test.png',
                 'image/png',
                 null,
@@ -70,8 +70,8 @@ class UpdateProfileTest extends WebTestCase
             'profile[nickname]' => 'Nickname',
             'profile[email]' => 'user+0@email.com',
             'profile[avatarFile]' => new UploadedFile(
-                __DIR__.'/../../public/uploads/avatar_test.png',
-                'avatar_test.png',
+                __DIR__.'/../../public/uploads/avatar.png',
+                'avatar.png',
                 'image/png',
                 null,
                 true
