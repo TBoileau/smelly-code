@@ -24,7 +24,7 @@ class UpdatePasswordTest extends WebTestCase
 
         $client->request('GET', '/update-password');
 
-        $client->submitForm('Modifier', [
+        $client->submitForm('Update', [
             'user[currentPassword]' => 'password',
             'user[plainPassword]' => 'edit_password',
         ]);
@@ -51,7 +51,7 @@ class UpdatePasswordTest extends WebTestCase
 
         $client->request('GET', '/update-password');
 
-        $client->submitForm('Modifier', $formData);
+        $client->submitForm('Update', $formData);
 
         $this->assertResponseStatusCodeSame(422);
     }

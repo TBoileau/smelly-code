@@ -17,7 +17,7 @@
                 <a href="{{ path("smelly_code_show") }}">Smelly Code</a>
                 <ul>
                     <li>
-                        <a href="{{ path("smelly_code_new") }}">Poster</a>
+                        <a href="{{ path("smelly_code_new") }}">New</a>
                     </li>
                     <li>
                         <a href="{{ path("smelly_code_top") }}">Top Smelly codes</a>
@@ -27,7 +27,10 @@
                     </li>
                     {% if is_granted('ROLE_USER') %}
                         <li>
-                            <a href="{{ path("user_profile") }}">Profil</a>
+                            <a href="{{ path("user_profile") }}">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ path("user_password") }}">Password</a>
                         </li>
                         <li>
                             <a href="{{ path("security_logout") }}">Logout</a>
