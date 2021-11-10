@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\DataTransformer\TagsDataTransformer;
-use App\Entity\Gist;
+use App\Dto\SmellyCode;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class GistType extends AbstractType
+final class SmellyCodeType extends AbstractType
 {
     public function __construct(private TagsDataTransformer $tagsDataTransformer)
     {
@@ -33,6 +33,6 @@ final class GistType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class', Gist::class);
+        $resolver->setDefault('data_class', SmellyCode::class);
     }
 }

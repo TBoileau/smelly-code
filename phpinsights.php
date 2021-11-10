@@ -8,6 +8,7 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
+use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
@@ -105,10 +106,14 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/Security/WebAuthenticator',
-                'src/Form/RegistrationType',
-                'src/Form/GistType',
+                'src/Form',
                 'src/Doctrine/DQL/RandFunction',
                 'src/Security/Voter/SmellyCodeVoter',
+            ],
+        ],
+        ForbiddenPublicPropertySniff::class => [
+            'exclude' => [
+                'src/Dto',
             ],
         ],
         ParameterTypeHintSniff::class => [
