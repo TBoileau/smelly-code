@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Entity\Carbon;
 use App\Entity\Gist;
 use App\Entity\SmellyCode;
 use App\Entity\User;
@@ -25,11 +26,32 @@ final class ShowSmellyCodeTest extends WebTestCase
         $this->assertResponseStatusCodeSame(302);
     }
 
-    public function testIfSmellyCodeShown(): void
+    public function testIfCarbonIsShown(): void
     {
         $client = static::createClient();
 
-        $client->request('GET', '/');
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var Carbon $carbon */
+        $carbon = $entityManager->getRepository(Carbon::class)->findOneBy([]);
+
+        $client->request('GET', '/'.$carbon->getId());
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testIfGistIsShown(): void
+    {
+        $client = static::createClient();
+
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var Gist $gist */
+        $gist = $entityManager->getRepository(Gist::class)->findOneBy([]);
+
+        $client->request('GET', '/'.$gist->getId());
 
         $this->assertResponseIsSuccessful();
     }
