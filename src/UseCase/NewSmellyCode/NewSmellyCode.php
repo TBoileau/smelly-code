@@ -6,6 +6,7 @@ namespace App\UseCase\NewSmellyCode;
 
 use App\Dto\SmellyCode as SmellyCodeDto;
 use App\Entity\User;
+use App\Factory\FlashMessageFactoryInterface;
 use App\Factory\SmellyCodeFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -16,7 +17,8 @@ final class NewSmellyCode implements NewSmellyCodeInterface
     public function __construct(
         private EntityManagerInterface $entityManager,
         private TokenStorageInterface $tokenStorage,
-        private SmellyCodeFactoryInterface $smellyCodeFactory
+        private SmellyCodeFactoryInterface $smellyCodeFactory,
+        private FlashMessageFactoryInterface $flashMessageFactory
     ) {
     }
 
@@ -35,5 +37,10 @@ final class NewSmellyCode implements NewSmellyCodeInterface
 
         $this->entityManager->persist($smellyCode);
         $this->entityManager->flush();
+
+        $this->flashMessageFactory->send(
+            FlashMessageFactoryInterface::STATUS_SUCCESS,
+            'Smelly code created.'
+        );
     }
 }
