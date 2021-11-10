@@ -25,7 +25,7 @@ class UpdateProfileTest extends WebTestCase
 
         $client->request('GET', '/update-profile');
 
-        $client->submitForm('Modifier', [
+        $client->submitForm('Update', [
             'profile[nickname]' => 'Nickname',
             'profile[email]' => 'user+0@email.com',
             'profile[avatarFile]' => new UploadedFile(
@@ -59,7 +59,7 @@ class UpdateProfileTest extends WebTestCase
 
         $client->request('GET', '/update-profile');
 
-        $client->submitForm('Modifier', $formData);
+        $client->submitForm('Update', $formData);
 
         $this->assertResponseStatusCodeSame(422);
     }

@@ -15,7 +15,7 @@ final class SecurityTest extends WebTestCase
 
         $client->request('GET', '/register');
 
-        $client->submitForm('S\'inscrire', [
+        $client->submitForm('Sign up', [
             'registration[email]' => 'user+11@email.com',
             'registration[plainPassword]' => 'password',
             'registration[nickname]' => 'user+11',
@@ -44,7 +44,7 @@ final class SecurityTest extends WebTestCase
 
         $client->request('GET', '/register');
 
-        $client->submitForm('S\'inscrire', $formData);
+        $client->submitForm('Sign up', $formData);
 
         $this->assertResponseStatusCodeSame(422);
     }
@@ -71,7 +71,7 @@ final class SecurityTest extends WebTestCase
 
         $client->request('GET', '/login');
 
-        $client->submitForm('Se connecter', [
+        $client->submitForm('Sign in', [
             'email' => 'user+1@email.com',
             'password' => 'password',
         ]);
@@ -94,7 +94,7 @@ final class SecurityTest extends WebTestCase
 
         $client->request('GET', '/login');
 
-        $client->submitForm('Se connecter', $formData);
+        $client->submitForm('Sign in', $formData);
 
         $this->assertResponseStatusCodeSame(302);
 

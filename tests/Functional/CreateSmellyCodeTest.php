@@ -42,7 +42,7 @@ final class CreateSmellyCodeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        $client->submitForm('Créer', [
+        $client->submitForm('Create', [
             'smelly_code[url]' => 'https://gist.github.com/TBoileau/46e591a7e668757777db6c52e9f6d8c5',
             'smelly_code[tags]' => 'Tag 1,foo',
             'smelly_code[name]' => 'New smelly code',
@@ -71,7 +71,7 @@ final class CreateSmellyCodeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        $client->submitForm('Créer', [
+        $client->submitForm('Create', [
             'smelly_code[url]' => 'https://carbon.now.sh/jimM1JPlkCNu64pcyD2N',
             'smelly_code[tags]' => 'Tag 1,foo',
             'smelly_code[name]' => 'New smelly code',
@@ -105,7 +105,7 @@ final class CreateSmellyCodeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
 
-        $client->submitForm('Créer', $formData);
+        $client->submitForm('Create', $formData);
 
         $this->assertResponseStatusCodeSame(422);
     }
