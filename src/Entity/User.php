@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'string')]
     private string $password;
 
-    #[NotBlank(groups: ['register'])]
+    #[NotBlank(groups: ['register', 'password'])]
     private ?string $plainPassword = null;
 
     /**
