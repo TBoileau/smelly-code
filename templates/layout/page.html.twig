@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% block header %}
+        <header>
+            {{ include('menu/main-menu.html.twig') }}
+        </header>
+    {% endblock %}
+    {% block main %}
+        <main class="flex-shrink-0">
+            <div class="container">
+                {{ include('misc/alert.html.twig') }} 
+                {% block content %}{% endblock %}
+            </div>
+        </main>   
+    {% endblock %}
+    {% block footer %}
+        <footer class="footer mt-auto py-3 bg-light text-center">
+            <div class="container">
+                <a href="https://github.com/TBoileau/smelly-code">smelly-code</a>
+                <span class="text-muted">2021.</span>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}

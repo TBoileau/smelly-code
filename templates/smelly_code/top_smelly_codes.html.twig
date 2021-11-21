@@ -1,17 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/page.html.twig' %}
 
-{% block body %}
-    <ul>
-        {% for smelly_code in smelly_codes %}
-            <li>
-                {{ smelly_code.name }}
-                {{ smelly_code.createdAt|date('d/m/y') }}
-                {{ smelly_code.updatedAt|date('d/m/y') }}
-                {{ smelly_code.user.nickname }}
-                {% for tag in smelly_code.tags %}
-                    {{ tag.name }}
-                {% endfor %}
-            </li>
-        {% endfor %}
-    </ul>
+{% block content %}
+    <h1 class="mt-5">Top Smelly</h1>
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    Top
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for smelly_code in smelly_codes %}
+                        <li class="list-group-item">
+                            {{ smelly_code.name }}
+                            {{ smelly_code.createdAt|date('d/m/y') }}
+                            {{ smelly_code.updatedAt|date('d/m/y') }}
+                            {{ smelly_code.user.nickname }}
+                            {% for tag in smelly_code.tags %}
+                                {{ tag.name }}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

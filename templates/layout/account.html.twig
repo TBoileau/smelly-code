@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% block header %}
+        <header>
+            {{ include('menu/main-menu.html.twig') }}
+        </header>
+    {% endblock %}
+    {% block main %}
+        <main class="flex-shrink-0">
+            <div class="container">
+                {{ include('misc/alert.html.twig') }} 
+                <div class="row justify-content-center py-4">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-3">
+                            <div class="card-header">
+                                <h1 class="h3 text-center font-weight-light my-4">
+                                    {% block content_header %}{{ block('title') }}{% endblock %}
+                                </h1>
+                            </div>
+                            <div class="card-body">
+                                {% block content %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>   
+    {% endblock %}
+    {% block footer %}
+        <footer class="footer mt-auto py-3 bg-light text-center">
+            <div class="container">
+                <a href="https://https://github.com/TBoileau/smelly-code">smelly-code</a>
+                <span class="text-muted">2021.</span>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}

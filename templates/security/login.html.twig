@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/account.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
 
-{% block body %}
+{% block content %}
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,6 +13,8 @@
         <label for="inputPassword">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+        <div class="text-center py-3">
+            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+        </div>
     </form>
 {% endblock %}

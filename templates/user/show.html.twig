@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/page.html.twig' %}
 
-{% block body %}
-    <h1>{{ user.nickname }}</h1>
+{% block content %}
+    <h1 class="mt-5">{{ user.nickname }}</h1>
     <ul>
         {% for smelly_code in smelly_codes %}
             <li>

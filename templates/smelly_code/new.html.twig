@@ -1,8 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/page.html.twig' %}
 
-{% block body %}
-    {{ form_start(form) }}
-        {{ form_rest(form) }}
-        <button>Create</button>
-    {{ form_end(form) }}
+{% block title %}Create{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Create</h1>
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    New
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    {{ form_rest(form) }}
+                    <div class="text-center py-3">
+                        <button class="btn btn-lg btn-primary" type="submit">Create</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
