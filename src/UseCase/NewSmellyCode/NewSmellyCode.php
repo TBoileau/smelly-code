@@ -27,7 +27,7 @@ final class NewSmellyCode implements NewSmellyCodeInterface
         $smellyCode = $this->smellyCodeFactory->createFromDto($smellyCodeDto);
 
         if (null === $this->tokenStorage->getToken() || !$this->tokenStorage->getToken()->getUser() instanceof User) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedException(); // @codeCoverageIgnore
         }
 
         /** @var User $user */
