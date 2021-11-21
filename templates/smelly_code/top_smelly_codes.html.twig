@@ -5,6 +5,12 @@
         {% for smelly_code in smelly_codes %}
             <li>
                 {{ smelly_code.name }}
+                {{ smelly_code.createdAt|date('d/m/y') }}
+                {{ smelly_code.updatedAt|date('d/m/y') }}
+                {{ smelly_code.user.nickname }}
+                {% for tag in smelly_code.tags %}
+                    {{ tag.name }}
+                {% endfor %}
             </li>
         {% endfor %}
     </ul>

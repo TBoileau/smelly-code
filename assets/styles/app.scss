@@ -1,4 +1,5 @@
 @import "~reset-css";
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 @mixin container() {
   max-width: 1200px;
@@ -16,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: Lato, sans-serif;
 }
 
 header {
@@ -29,6 +31,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
     ul {
       display: flex;

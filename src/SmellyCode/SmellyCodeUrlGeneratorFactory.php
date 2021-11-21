@@ -23,6 +23,6 @@ final class SmellyCodeUrlGeneratorFactory implements SmellyCodeUrlGeneratorFacto
             }
         }
 
-        throw new \LogicException(sprintf('Try to implement an UrlGenerator for %s.', $smellyCode::class));
+        throw new \LogicException(sprintf('Try to implement an UrlGenerator for %s.', $smellyCode::class)); // @codeCoverageIgnore
     }
 }

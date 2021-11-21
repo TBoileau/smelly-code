@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Functional;
+namespace App\Tests;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +29,7 @@ class UpdateProfileTest extends WebTestCase
             'profile[nickname]' => 'Nickname',
             'profile[email]' => 'user+0@email.com',
             'profile[avatarFile]' => new UploadedFile(
-                __DIR__.'/../../public/uploads/avatar.png',
+                __DIR__.'/../public/uploads/avatar.png',
                 'avatar_test.png',
                 'image/png',
                 null,
@@ -70,7 +70,7 @@ class UpdateProfileTest extends WebTestCase
             'profile[nickname]' => 'Nickname',
             'profile[email]' => 'user+0@email.com',
             'profile[avatarFile]' => new UploadedFile(
-                __DIR__.'/../../public/uploads/avatar.png',
+                __DIR__.'/../public/uploads/avatar.png',
                 'avatar.png',
                 'image/png',
                 null,
@@ -84,14 +84,14 @@ class UpdateProfileTest extends WebTestCase
         yield 'nickname is empty' => [$baseData(['profile[nickname]' => ''])];
         yield 'nickname is not unique' => [$baseData(['profile[nickname]' => 'user+2'])];
         yield 'avatar is not an image' => [$baseData(['profile[avatarFile]' => new UploadedFile(
-            __DIR__.'/../../public/uploads/fail.txt',
+            __DIR__.'/../public/uploads/fail.txt',
             'fail.txt',
             'text/plain',
             null,
             true
         )])];
         yield 'avatar is too big' => [$baseData(['profile[avatarFile]' => new UploadedFile(
-            __DIR__.'/../../public/uploads/fail.jpg',
+            __DIR__.'/../public/uploads/fail.jpg',
             'fail.jpg',
             'text/plain',
             null,

@@ -21,7 +21,7 @@ final class FlashMessageFactory implements FlashMessageFactoryInterface
             self::STATUS_SUCCESS,
             self::STATUS_WARNING,
         ])) {
-            throw new \Exception('This status does not exist.');
+            throw new \Exception('This status does not exist.'); // @codeCoverageIgnore
         }
 
         /** @var Session $session */

@@ -20,9 +20,7 @@ final class TwigFilters extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return [
-            new TwigFilter('smelly_code', [$this, 'smellyCode']),
-        ];
+        return [new TwigFilter('smelly_code', [$this, 'smellyCode'])];
     }
 
     public function smellyCode(SmellyCode $smellyCode): string
