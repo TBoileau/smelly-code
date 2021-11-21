@@ -1,10 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/account.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Register{% endblock %}
 
-{% block body %}
+{% block content %}
     {{ form_start(form) }}
-        {{ form_rest(form) }}
-        <button>Sign up</button>
+    {{ form_rest(form) }}
+    <div class="text-center py-3">
+        <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

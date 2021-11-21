@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path("smelly_code_show") }}">Smelly Code</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link me-lg-3" href="{{ path("smelly_code_new") }}">New</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-lg-3" href="{{ path("smelly_code_top") }}">Top Smelly codes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-lg-3" href="{{ path("user_top") }}">Top Users</a>
+                </li>
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-3" href="{{ path("user_profile") }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-3" href="{{ path("user_password") }}">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-3" href="{{ path("security_logout") }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link me-lg-3" href="{{ path("security_login") }}">Sign in</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/page.html.twig' %}
 
-{% block body %}
-    <ul>
-        {% for user in users %}
-            <li>
-                <a href="{{ path('user_show', {nickname: user.nickname}) }}">{{ user.nickname }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+{% block content %}
+    <h1 class="mt-5">Top Users</h1>
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    Top
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for user in users %}
+                        <li class="list-group-item">
+
+                            <a href="{{ path('user_show', {nickname: user.nickname}) }}">{{ user.nickname }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

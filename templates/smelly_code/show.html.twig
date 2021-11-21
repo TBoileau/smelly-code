@@ -1,19 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout/page.html.twig' %}
 
-{% block body %}
-    <section>
+{% block content %}
+    <section class="py-2">
         {% if smelly_code is not null %}
-            <h1>{{ smelly_code.name }}</h1>
-            <embed src="https://carbon.now.sh/embed/{{ smelly_code|smelly_code }}"></embed>
-            <nav>
+            <h1 class="mt-5">{{ smelly_code.name }}</h1>
+            <div class="ratio ratio-21x9">
+                <embed src="https://carbon.now.sh/embed/{{ smelly_code|smelly_code }}"></embed>
+            </div>
+            <div class="d-grid gap-2">
                 {% if is_granted("vote", smelly_code) %}
-                    <a title="Down vote" href="{{ path('smelly_code_down_vote', {id: smelly_code.id}) }}">🥱 {{ smelly_code.downVotes|length }}</a>
+                    <a class="btn btn-outline-secondary" title="Down vote" href="{{ path('smelly_code_down_vote', {id: smelly_code.id}) }}">🥱 {{ smelly_code.downVotes|length }}</a>
                 {% endif %}
-                <a href="{{ path('smelly_code_skip', {id: smelly_code.id}) }}">Skip</a>
+                <a class="btn btn-outline-secondary" href="{{ path('smelly_code_skip', {id: smelly_code.id}) }}">Skip</a>
                 {% if is_granted("vote", smelly_code) %}
-                    <a title="Up vote" href="{{ path('smelly_code_up_vote', {id: smelly_code.id}) }}">🤮 {{ smelly_code.upVotes|length }}</a>
+                    <a class="btn btn-outline-secondary" title="Up vote" href="{{ path('smelly_code_up_vote', {id: smelly_code.id}) }}">🤮 {{ smelly_code.upVotes|length }}</a>
                 {% endif %}
-            </nav>
+            </div>
         {% endif %}
     </section>
 
